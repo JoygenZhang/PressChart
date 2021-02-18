@@ -1,0 +1,79 @@
+﻿<!-- TODO:修改压机的Title -->
+    <Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+    xmlns:local="clr-namespace:Charts"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" x:Class="Charts.MainWindow"
+    mc:Ignorable="d"
+    Title="12#压机" Loaded="Window_Loaded" d:DesignWidth="1920" d:DesignHeight="1080"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    DataContext="{Binding PressData, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700*" />
+            <ColumnDefinition Width="110*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- <ComboBox   Grid.Column="1" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Width="258" Height="76"/> -->
+
+        <!-- <d3:ChartPlotter x:Name="Plotter" Mouse.GotMouseCapture="Plotter_OnGotMouseCapture"> -->
+        <d3:ChartPlotter x:Name="Plotter" Grid.Column="0" Grid.Row="0" >
+
+            <d3:ChartPlotter.HorizontalAxis>
+                <d3:NumericAxis />
+            </d3:ChartPlotter.HorizontalAxis>
+            <!-- <d3:CursorCoordinateGraph Name="CoordinateGraph" GotMouseCapture="CoordinateGraph_OnGotMouseCapture"/> -->
+            <d3:HorizontalAxisTitle Content="压实器位置mm" />
+            <d3:VerticalAxisTitle Content="电机电流A" />
+            <d3:LineGraph  DataSource="{Binding SiSource}" />
+
+        </d3:ChartPlotter>
+
+
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="实时数据" HorizontalAlignment="Left" Margin="5,10,0,0"
+                  VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="循环时间" HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Grid.Row="0" Grid.Column="0" />
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Cycletime }" HorizontalAlignment="Left"
+                       VerticalAlignment="Center" />
+                <Label Content="高度值" HorizontalAlignment="Left"
+                       VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+                <Label Content="{Binding ServoPosition}"
+                       VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" />
+                <Label Content="电流值" HorizontalAlignment="Left"
+                       VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+                <Label Content="{Binding ServoCurrent}"
+                       VerticalAlignment="Center" Grid.Column="1"
+                       Grid.Row="2" />
+            </Grid>
+
+        </GroupBox>
+
+
+    </Grid>
+</Window>
